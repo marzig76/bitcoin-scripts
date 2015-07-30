@@ -1,0 +1,3 @@
+https://bitcoin.org/en/developer-examples#transaction-tutorial
+
+bitcoind -regtest -daemon
