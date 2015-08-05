@@ -1,6 +1,4 @@
 import re
-import json
-from restful_lib import Connection
 from bitcoinrpc.authproxy import AuthServiceProxy
 
 class coinrpc:
@@ -26,6 +24,5 @@ class coinrpc:
 
 
 # test it
-bitcoinrpc = coinrpc("../../bitcoin-0.10.2/bitcoin/bitcoin.conf").rpccon()
-
-print bitcoinrpc.getinfo()
+#bitcoinrpc = coinrpc("../../bitcoin-0.10.2/bitcoin/bitcoin.conf").rpccon()
+#print bitcoinrpc.getinfo()
