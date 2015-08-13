@@ -3,16 +3,16 @@ content-length: 39
 x-xss-protection: 1; mode=block
 content-location: https://shapeshift.io/rate/btc_ltc
 x-content-type-options: nosniff
-set-cookie: __cfduid=d7fe1e4157160919632381b922db6cf3d1438543464;
- expires=Mon, 01-Aug-16 19:24:24 GMT; path=/; domain=.shapeshift.io; HttpOnly
+set-cookie: __cfduid=d9432d1681c2e6067e200c0bed911e75e1439400036;
+ expires=Thu, 11-Aug-16 17:20:36 GMT; path=/; domain=.shapeshift.io; HttpOnly
 server: cloudflare-nginx
 access-control-allow-origin: *
 connection: keep-alive
-etag: W/"27-54025f54"
-date: Sun, 02 Aug 2015 19:24:24 GMT
-cf-ray: 20fc29ae8e790167-ORD
+etag: W/"27-84b8e8c2"
+date: Wed, 12 Aug 2015 17:20:37 GMT
+cf-ray: 214dda13c1e30430-ORD
 access-control-allow-headers: Origin, X-Requested-With, Content-Type, Accept
 content-type: application/json; charset=utf-8
 x-frame-options: DENY
 
-{"pair":"btc_ltc","rate":"67.47024614"}
+{"pair":"btc_ltc","rate":"66.30915934"}
