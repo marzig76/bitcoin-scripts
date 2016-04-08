@@ -8,10 +8,20 @@ import hashlib
 resultfile = open("results.txt", 'w')
 
 alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
 target_addr = '1J5cjne6YVkgRTMTjqnaJVk1CWEEr3CcdX'
 encpriv = '6PfRB98F9vZLhSpqY5URas5vYUU3qYQrpkJFTLuCg1FvDni6LwT3qAirkp'
+guess_length = 6
+min_upper = 3
+max_upper = 5
 
+
+# easy example:
+#alphabet = 'aBrT'
+#target_addr = '1Pnc9qRUEhPJd4XrKhFRxkSSs2h6XA7ZUR'
+#encpriv = '6PfLsoUAbQ4uKuCtAkzer1KH1Rcaw5WMEmShwA6Q9GtwhbiHfaHP6mqqfT'
+#guess_length = 4
+#min_upper = 0
+#max_upper = 4
 
 def rando():
     return random.randrange(0, len(alphabet))
@@ -46,7 +56,7 @@ def pub_from_priv(privkey):
 
 while True:
     # generate key
-    secret_key = guess(6)
+    secret_key = guess(guess_length)
     print secret_key
 
     # hint - only 3,4 or 5 uppercase characters
@@ -55,7 +65,7 @@ while True:
         if i == str.upper(i):
             count += 1
 
-    if 3 <= count <= 5:
+    if min_upper <= count <= max_upper:
         # decrypt bip38 encrypted key
         wif = pybip38.bip38decrypt(secret_key, encpriv)
 
