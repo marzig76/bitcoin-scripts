@@ -14,14 +14,13 @@ guess_length = 6
 min_upper = 3
 max_upper = 5
 
-
 # easy example:
 #alphabet = 'aBrT'
 #target_addr = '1Pnc9qRUEhPJd4XrKhFRxkSSs2h6XA7ZUR'
 #encpriv = '6PfLsoUAbQ4uKuCtAkzer1KH1Rcaw5WMEmShwA6Q9GtwhbiHfaHP6mqqfT'
 #guess_length = 4
-#min_upper = 0
-#max_upper = 4
+#min_upper = 2
+#max_upper = 2
 
 def rando():
     return random.randrange(0, len(alphabet))
