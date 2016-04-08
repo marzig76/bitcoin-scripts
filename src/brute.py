@@ -22,6 +22,7 @@ max_upper = 5
 #min_upper = 2
 #max_upper = 2
 
+
 def rando():
     return random.randrange(0, len(alphabet))
 
@@ -58,7 +59,7 @@ while True:
     secret_key = guess(guess_length)
     print secret_key
 
-    # hint - only 3,4 or 5 uppercase characters
+    # how many uppercase characters?
     count = 0
     for i in secret_key:
         if i == str.upper(i):
