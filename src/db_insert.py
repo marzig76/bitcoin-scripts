@@ -1,6 +1,8 @@
+import sqlite3
 from block import block
 from script import script
-import sqlite3
+from blockutil import pkhash2addr
+from blockutil import pubkey2addr
 
 blockfile = '/home/marzig76/.bitcoin/blocks/blk00004.dat'
 blockstream = open(blockfile, 'rb')
@@ -47,25 +49,34 @@ for t in b.txs:
 
     # insert each tx_input
     for ti in t.tx_inputs:
+        addr = pubkey2addr(ti.sigscript)
+
         insert_txinput = (
             "INSERT INTO block_txinput " +
-            "(prev_hash, `index`, script_bytes, sigscript, sequence, tx_id)" +
+            "(prev_hash, `index`, script_bytes, sigscript, sequence, addr, tx_id)" +
             "VALUES " +
-            "(?,?,?,?,?,?)"
+            "(?,?,?,?,?,?,?)"
         )
         c.execute(insert_txinput, (ti.prev_hash, ti.index, ti.script_bytes,
                                    ti.sigscript.encode('hex'), ti.sequence,
-                                   tx_id))
+                                   addr, tx_id))
         conn.commit()
 
     # insert each tx_output
     for to in t.tx_outputs:
+        spk = to.script_pk.encode('hex')
+
+        if spk[:6] == '76a914':
+            addr = pkhash2addr(spk[6:46])
+        else:
+            addr = ''
+
         insert_txoutput = (
             "INSERT INTO block_txoutput " +
-            "(value, script_pk_bytes, script_pk, tx_id)" +
+            "(value, script_pk_bytes, script_pk, addr, script_pk_string, tx_id)" +
             "VALUES " +
-            "(?,?,?,?)"
+            "(?,?,?,?,?,?)"
         )
         c.execute(insert_txoutput, (to.value, to.script_pk_bytes,
-                                    to.script_pk.encode('hex'), tx_id))
+                                    spk, addr, str(script(to.script_pk)), tx_id))
         conn.commit()
