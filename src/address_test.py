@@ -17,3 +17,6 @@ for t in b.txs:
 
         if spk[:6] == '76a914':
             print 'out addr: ' + pkhash2addr(spk[6:46])
+
+        ss = str(script(to.script_pk))
+        print 'script string: ' + ss
