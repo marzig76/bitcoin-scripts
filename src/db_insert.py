@@ -1,10 +1,10 @@
 import sqlite3
 from block import block
-from script import script
+from script import script, scriptSig
 from blockutil import pkhash2addr
 from blockutil import pubkey2addr
 
-blockfile = '/home/marzig76/.bitcoin/blocks/blk00004.dat'
+blockfile = '/home/marzig76/.bitcoin/blocks/blk00007.dat'
 blockstream = open(blockfile, 'rb')
 b = block(blockstream)
 
@@ -34,9 +34,10 @@ for t in b.txs:
     # insert tx
     insert_tx = (
         "INSERT INTO block_tx " +
-        "(version, tx_input_count, tx_output_count, lock_time, block_id)" +
+        "(version, tx_input_count, tx_output_count, lock_time, " +
+        "block_id, tx_hash)" +
         "VALUES " +
-        "(?,?,?,?,?)"
+        "(?,?,?,?,?,'')"
     )
     c.execute(insert_tx, (t.version, t.tx_input_count, t.tx_output_count,
                           t.lock_time, block_id))
@@ -49,7 +50,8 @@ for t in b.txs:
 
     # insert each tx_input
     for ti in t.tx_inputs:
-        addr = pubkey2addr(ti.sigscript)
+        scriptsig = scriptSig(ti.sigscript)
+        addr = pubkey2addr(scriptsig.pubkey)
 
         insert_txinput = (
             "INSERT INTO block_txinput " +
